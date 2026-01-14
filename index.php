@@ -1,40 +1,51 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>Input Data Mahasiswa</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <title>Home</title>
 </head>
-<body class="container mt-4">
+<body>
 
-<h3 class="mb-3">Input Data Mahasiswa</h3>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Akademik</a>
 
-<form method="POST" action="proses_input.php">
+    <button class="navbar-toggler" type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarTogglerDemo01"
+      aria-controls="navbarTogglerDemo01"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-
-    <div class="mb-3">
-        <label>NIM</label>
-        <input type="text" name="nim" class="form-control" required>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="index.php">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="mahasiswa/index.php">Mahasiswa</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="prodi/index.php">Prodi</a>
+        </li>
+      </ul>
     </div>
+  </div>
+</nav>
 
-    <div class="mb-3">
-        <label>Nama Mahasiswa</label>
-        <input type="text" name="nama_mhs" class="form-control" required>
-    </div>
+<div class="container mt-4 justify-content-center text-center">
+  <h1>Welcome to the Akademik System</h1>
+  <p>This is the home page.</p>
 
-    <div class="mb-3">
-        <label>Tanggal Lahir</label>
-        <input type="date" name="tgl_lahir" class="form-control" required>
-    </div>
-
-    <div class="mb-3">
-        <label>Alamat</label>
-        <textarea class="form-control" name="alamat" rows="3" required></textarea>
-    </div>
-
-    <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
-    <a href="list.php" class="btn btn-secondary">Lihat Data</a>
-
-</form>
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

@@ -1,12 +1,16 @@
+<!-- 
 <?php
-$server = "localhost";
-$user = "root";
-$password = "";
-$dbname = "db_akademik";
+# cara 1
+    $db = mysqli_connect('localhost','root','','db_akademik');
+?> -->
 
-$db = mysqli_connect($server, $user, $password, $dbname);
-
-if (!$db) {
-    die("Koneksi gagal: " . mysqli_connect_error());
-}
+<?php
+# cara 2
+    $host = 'localhost';
+    $user = 'root';
+    $password = '';
+    $db_name = 'db_akademik';
+   
+    // open connection
+    $koneksi = new mysqli($host, $user, $password, $db_name);
 ?>
