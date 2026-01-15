@@ -1,8 +1,11 @@
 <?php
-    include ("../koneksi.php");
-?>
-
-
+session_start();
+// CEK LOGIN
+if (!isset($_SESSION['id_user'])) {
+    header("Location: ../login.php");
+    exit();
+}
+require('../koneksi.php');
 <?php
 // create 
 if (isset($_POST['submit'])){

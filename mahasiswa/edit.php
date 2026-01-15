@@ -1,6 +1,11 @@
 <?php
+session_start();
+// CEK LOGIN
+if (!isset($_SESSION['id_user'])) {
+    header("Location: ../login.php");
+    exit();
+}
 require('../koneksi.php');
-
 /* ===== VALIDASI PARAMETER ===== */
 if (!isset($_GET['nim'])) {
     header("Location: index.php");

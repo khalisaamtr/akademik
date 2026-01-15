@@ -1,16 +1,16 @@
-<!-- 
 <?php
-# cara 1
-    $db = mysqli_connect('localhost','root','','db_akademik');
-?> -->
+// Pengaturan Database
+$host = 'localhost';
+$user = 'root';
+$password = '';
+$db_name = 'db_akademik'; // Nama database kamu
 
-<?php
-# cara 2
-    $host = 'localhost';
-    $user = 'root';
-    $password = '';
-    $db_name = 'db_akademik';
-   
-    // open connection
-    $koneksi = new mysqli($host, $user, $password, $db_name);
+// Membuka koneksi menggunakan metode Object-Oriented
+$koneksi = new mysqli($host, $user, $password, $db_name);
+
+// Cek apakah koneksi berhasil
+if ($koneksi->connect_error) {
+    // Jika gagal, tampilkan pesan error dan hentikan program
+    die("Koneksi ke database gagal: " . $koneksi->connect_error);
+}
 ?>

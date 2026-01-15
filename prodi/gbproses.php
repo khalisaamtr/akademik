@@ -1,31 +1,38 @@
 <?php
-    include ("../koneksi.php");
-?>
+session_start();
 
-
-<?php
-// create 
-if (isset($_POST['submit'])){
-    $nama_prodi = $_POST['nama_prodi'];
-    $jenjang = $_POST['jenjang'];
-    $keterangan = $_POST['keterangan'];
-    $sql = "INSERT INTO prodi(nama_prodi,jenjang,keterangan) VALUES ('$nama_prodi','$jenjang','$keterangan')";
-
-    $query = $koneksi->query($sql);
-    header("Location: index.php");
+// 1. CEK LOGIN
+if (!isset($_SESSION['id_user'])) {
+    header("Location: ../login.php");
     exit();
 }
-?>
 
-<?php 
-// edit
+// 2. KONEKSI
+require('../koneksi.php');
 
+// --- PROSES CREATE ---
+if (isset($_POST['submit'])){
+    $nama_prodi = mysqli_real_escape_string($koneksi, $_POST['nama_prodi']);
+    $jenjang = mysqli_real_escape_string($koneksi, $_POST['jenjang']);
+    $keterangan = mysqli_real_escape_string($koneksi, $_POST['keterangan']);
+    
+    $sql = "INSERT INTO prodi(nama_prodi, jenjang, keterangan) VALUES ('$nama_prodi', '$jenjang', '$keterangan')";
+
+    $query = $koneksi->query($sql);
+    if ($query) {
+        header("Location: index.php");
+        exit();
+    } else {
+        echo "Gagal menambah data: " . $koneksi->error;
+    }
+}
+
+// --- PROSES EDIT ---
 if (isset($_POST['update'])) {
-    // Ambil data dari POST, bukan GET
     $id = intval($_POST['id']);
-    $nama_prodi = $_POST['nama_prodi'];
-    $jenjang = $_POST['jenjang'];
-    $keterangan = $_POST['keterangan'];
+    $nama_prodi = mysqli_real_escape_string($koneksi, $_POST['nama_prodi']);
+    $jenjang = mysqli_real_escape_string($koneksi, $_POST['jenjang']);
+    $keterangan = mysqli_real_escape_string($koneksi, $_POST['keterangan']);
 
     $sql = "UPDATE prodi 
             SET nama_prodi='$nama_prodi', 
@@ -42,17 +49,22 @@ if (isset($_POST['update'])) {
         echo "Maaf, data gagal diubah: " . $koneksi->error;
     }
 }
-?>
 
-<?php 
-    $sql = "DELETE FROM prodi where id=$_GET[id]";
+// --- PROSES DELETE ---
+if (isset($_GET['id'])) {
+    $id = intval($_GET['id']);
+    $sql = "DELETE FROM prodi WHERE id=$id";
     $hapus = $koneksi->query($sql);
+    
     if($hapus){
         header("Location: index.php");
         exit();
-    }else{
-        echo "Gagal menghapus data";
+    } else {
+        echo "Gagal menghapus data: " . $koneksi->error;
     }
+} else {
+    // Jika file diakses langsung tanpa aksi, kembalikan ke index
+    header("Location: index.php");
+    exit();
+}
 ?>
-
-

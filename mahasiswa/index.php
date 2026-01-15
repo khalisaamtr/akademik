@@ -1,5 +1,11 @@
-<?php 
-    require ('../koneksi.php');
+<?php
+session_start();
+// CEK LOGIN
+if (!isset($_SESSION['id_user'])) {
+    header("Location: ../login.php");
+    exit();
+}
+require('../koneksi.php');
     $query = "SELECT mahasiswa.*, prodi.nama_prodi 
               FROM mahasiswa 
               JOIN prodi ON mahasiswa.prodi_id = prodi.id";
@@ -18,33 +24,34 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Akademik</a>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Akademik</a>
 
-            <button class="navbar-toggler" type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01">
             <span class="navbar-toggler-icon"></span>
-            </button>
+        </button>
 
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                <a class="nav-link active" href="../index.php">Home</a>
+                    <a class="nav-link" href="../index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="index.php">Mahasiswa</a>
+                    <a class="nav-link active" href="index.php">Mahasiswa</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="../prodi/index.php">Prodi</a>
+                    <a class="nav-link" href="../prodi/index.php">Prodi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-info" href="../profil/edit_profil.php">Edit Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="../logout.php">Logout</a>
                 </li>
             </ul>
-            </div>
         </div>
-        </nav>
+    </div>
+</nav>
     <div class="container mt-4">
         <div class="d-flex align-items-center justify-content-between mb-3">
             <h1 class="m-0">List Data Mahasiswa</h1>

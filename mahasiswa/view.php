@@ -1,5 +1,11 @@
-<?php 
-require ('../koneksi.php');
+<?php
+session_start();
+// CEK LOGIN
+if (!isset($_SESSION['id_user'])) {
+    header("Location: ../login.php");
+    exit();
+}
+require('../koneksi.php');
 $sql = "SELECT mahasiswa.*, prodi.nama_prodi
         FROM mahasiswa
         Join prodi ON mahasiswa.prodi_id = prodi.id
